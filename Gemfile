@@ -45,3 +45,7 @@ group :development do
   gem 'spring'
 end
 
+
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
+gem 'autoprefixer-rails', '~> 6.3', '>= 6.3.6'
+gem 'kaminari', '~> 0.16.3'
