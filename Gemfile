@@ -30,6 +30,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'mysql2', '~> 0.4.4'
 end
 
 group :development do
@@ -40,10 +41,9 @@ group :development do
   gem 'spring'
 end
 
-
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'autoprefixer-rails', '~> 6.3', '>= 6.3.6'
 gem 'kaminari', '~> 0.16.3'
 gem 'puma', '~> 3.4'
-gem 'mysql2', '~> 0.4.4'
 gem 'foreman', '~> 0.81.0'
+gem 'pg', '~> 0.18.4', group: :production
