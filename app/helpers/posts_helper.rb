@@ -4,4 +4,8 @@ module PostsHelper
     max_updated_at = Post.maximum(:updated_at).try(:utc).try(:to_s, :number)
     "posts/all-#{count}-#{max_updated_at}"
   end
+  
+  def most_visited_posts(count = 5)
+    Post.order(visits_count: :desc).limit(count)
+  end
 end

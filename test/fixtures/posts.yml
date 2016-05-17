@@ -4,6 +4,12 @@ one:
   title: MyString
   body: MyText
 
+
 two:
   title: MyString
   body: MyText
+
+my_post:
+  title: My New Post
+  body: Some post description here. Yes, here we go!
+  visits_count: 3
