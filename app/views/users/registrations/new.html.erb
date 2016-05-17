@@ -1,0 +1,18 @@
+<h2>Sign up</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  
+  <%= f.input :email, autofocus: true %>
+
+  <%= f.input :name %>
+  
+  <%= f.input :password %>
+
+  <%= f.input :password_confirmation %>
+
+  <div class="actions">
+    <%= f.button :submit, 'Signup', class: 'btn-primary' %> or
+    <%= link_to "Login", new_session_path(resource_name) %>
+  </div>
+<% end %>

@@ -46,4 +46,5 @@ gem 'kaminari', '~> 0.16.3'
 gem 'puma', '~> 3.4'
 gem 'foreman', '~> 0.81.0'
 gem 'pg', '~> 0.18.4', group: :production
-
+gem 'devise', '~> 4.1', '>= 4.1.1'
+gem 'simple_form', '~> 3.2', '>= 3.2.1'
