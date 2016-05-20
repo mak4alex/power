@@ -22,5 +22,26 @@ module Workspace
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    
+    config.action_mailer.default_url_options = { 
+      host: 'power-mak4alex.c9users.io', 
+      port: '80'
+    }
+    
+    config.action_mailer.delivery_method = :mailgun
+    config.action_mailer.mailgun_settings = {
+      address:        ENV['EMAIL_ADDRESS'],
+      port:           ENV['EMAIL_PORT'],
+      domain:         ENV['EMAIL_DOMAIN'],
+      api_key:        ENV['EMAIL_API_KEY'],
+      user_name:      ENV['EMAIL_USER_NAME'],
+      password:       ENV['EMAIL_PASSWORD'],
+      authentication: 'plain'
+    }
+    
+    config.active_job.queue_adapter = :delayed_job
   end
 end

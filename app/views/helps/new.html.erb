@@ -1,0 +1,11 @@
+<div class="page-header">
+  <h2>Send help message</h2>
+</div>
+<%= simple_form_for @help do |f| %>
+  <%= f.input :email, input_html: { value: (current_user && current_user.email) || '' } %>
+  <%= f.input :name, input_html: { value: (current_user && current_user.name) || '' }  %>
+  <%= f.input :topic %>
+  <%= f.input :body, as: :text %>
+  <%= f.input :attachment, as: :file %>
+  <%= f.button :submit, 'Send' %>
+<% end %>
