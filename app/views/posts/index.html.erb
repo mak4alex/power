@@ -1,35 +1,22 @@
 <h1>Listing Posts</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% cache(cache_key_for_posts) do %>
-      <% @posts.each do |post| %>
-        <% cache(post) do %>
-          <tr>
-            <td><%= post.title %></td>
-            <td><%= post.body %></td>
-            <td><%= link_to 'Show', post %></td>
-            <td><%= link_to 'Edit', edit_post_path(post) %></td>
-            <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
+<div class="infinite-table">
+  <table id="posts" class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Body</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody class="page">
+      <% cache(cache_key_for_posts) do %>
+        <%= render @posts %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
-
-<br>
-
-<%= paginate @posts %>
+    </tbody>
+  </table>
+  
+  <p class="pagination">
+    <%= link_to_next_page(@posts, 'Next Page', remote: true, params: {q: params[:q]}) %>
+  </p>
+</div>
