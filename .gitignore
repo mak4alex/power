@@ -17,3 +17,6 @@
 /tmp
 
 *.env
+
+/public/system/*
+/public/assets/*
