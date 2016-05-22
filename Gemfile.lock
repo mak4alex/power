@@ -71,12 +71,25 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    elasticsearch (1.0.17)
+      elasticsearch-api (= 1.0.17)
+      elasticsearch-transport (= 1.0.17)
+    elasticsearch-api (1.0.17)
+      multi_json
+    elasticsearch-transport (1.0.17)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.6.0)
+    faker (1.6.3)
+      i18n (~> 0.5)
+    faraday (0.9.2)
+      multipart-post (>= 1.2, < 3)
     foreman (0.81.0)
       thor (~> 0.19.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hashie (3.4.4)
     i18n (0.7.0)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -108,6 +121,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.12.0)
+    multipart-post (2.0.0)
     mysql2 (0.4.4)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
@@ -164,6 +178,10 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    searchkick (1.3.0)
+      activemodel
+      elasticsearch (>= 1)
+      hashie
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -202,6 +220,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   delayed_job_active_record (~> 4.1, >= 4.1.1)
   devise (~> 4.1, >= 4.1.1)
+  faker (~> 1.6, >= 1.6.3)
   foreman (~> 0.81.0)
   jbuilder (~> 2.0)
   jquery-infinite-pages (~> 0.2.0)
@@ -215,6 +234,7 @@ DEPENDENCIES
   rails (= 4.2.6)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  searchkick (~> 1.3)
   simple_form (~> 3.2, >= 3.2.1)
   spring
   turbolinks
