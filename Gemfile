@@ -56,3 +56,5 @@ gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.1'
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
 # A light-weight infinite scrolling jQuery plugin, wrapped in a gem for Rails
 gem 'jquery-infinite-pages', '~> 0.2.0'
+# Easily and efficiently make your ActiveRecord model support hierarchies
+gem 'closure_tree', '~> 6.0'

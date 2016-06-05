@@ -1,0 +1,7 @@
+<%= simple_form_for([post, comment], remote: true) do |f| %>
+  <%= f.input :post_id, as: :hidden, input_html: { value: post.id } %>
+  <%= f.input :parent_id, as: :hidden %>
+  <%= f.input :author %>
+  <%= f.input :body, as: :text %>
+  <%= f.button :submit, 'Comment', class: 'btn-primary pull-right' %>
+<% end %>
