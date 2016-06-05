@@ -1,8 +1,17 @@
 <% cache(post) do %>
-  <tr class="post" >
+  <tr class="post" <%= id(post) %> >
     <td><%= post.title %></td>
     <td><%= post.body %></td>
     <td><%= link_to 'Show', post %></td>
+    <% if user_signed_in? %>
+      <td class="favourite_link">
+        <% unless current_user.has_in_favourite?(post) %>
+          <%= render partial: 'add_favourite_link', locals: { post: post } %>
+        <% else %>
+          <%= render partial: 'remove_favourite_link', locals: { post: post } %>
+        <% end %>
+       </td>
+    <% end %>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

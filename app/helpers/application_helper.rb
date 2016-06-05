@@ -18,4 +18,8 @@ module ApplicationHelper
     nil
   end
   
+  def id(record)
+    "id=#{record.class.name.downcase}-#{record.id}"
+  end
+  
 end

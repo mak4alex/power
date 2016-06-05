@@ -28,4 +28,17 @@ class User < ActiveRecord::Base
     end
   end
   
+  
+  def add_favourite(post)
+    Favourite.create(user: self, post: post)
+  end
+  
+  def remove_favourite(post)
+    Favourite.delete_all(user: self, post: post)
+  end
+  
+  def has_in_favourite?(post)
+    Favourite.exists?(user: self, post: post)
+  end
+  
 end

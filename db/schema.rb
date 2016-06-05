@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528101315) do
+ActiveRecord::Schema.define(version: 20160605093020) do
 
   create_table "comment_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id",   limit: 4, null: false
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 20160528101315) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "favourites", id: false, force: :cascade do |t|
+    t.integer "user_id", limit: 4
+    t.integer "post_id", limit: 4
+  end
+
+  add_index "favourites", ["post_id"], name: "index_favourites_on_post_id", using: :btree
+  add_index "favourites", ["user_id", "post_id"], name: "index_favourites_on_user_id_and_post_id", unique: true, using: :btree
+  add_index "favourites", ["user_id"], name: "index_favourites_on_user_id", using: :btree
 
   create_table "helps", force: :cascade do |t|
     t.string   "name",                    limit: 255
@@ -98,4 +107,6 @@ ActiveRecord::Schema.define(version: 20160528101315) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "favourites", "posts"
+  add_foreign_key "favourites", "users"
 end
