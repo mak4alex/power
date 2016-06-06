@@ -1,18 +1,26 @@
 <% cache(post) do %>
-  <tr class="post" <%= id(post) %> >
-    <td><%= post.title %></td>
-    <td><%= post.body %></td>
-    <td><%= link_to 'Show', post %></td>
-    <% if user_signed_in? %>
-      <td class="favourite_link">
-        <% unless current_user.has_in_favourite?(post) %>
-          <%= render partial: 'add_favourite_link', locals: { post: post } %>
-        <% else %>
-          <%= render partial: 'remove_favourite_link', locals: { post: post } %>
-        <% end %>
-       </td>
-    <% end %>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <div class="post panel panel-default" <%= id(post) %> >
+    <div class="panel-heading">
+      <h2 class="panel-title"><%= post.title %></h2>
+    </div>
+    <div class="panel-body">
+      <%= post.body %>
+    </div>
+    <div class="panel-footer">
+      <% if user_signed_in? %>
+        <div class="favourite_link pull-right">
+          <% unless current_user.has_in_favourite?(post) %>
+            <%= render partial: 'add_favourite_link', locals: { post: post } %>
+          <% else %>
+            <%= render partial: 'remove_favourite_link', locals: { post: post } %>
+          <% end %>
+         </div>
+      <% end %>
+      <div>
+        <%= link_to 'Show', post %> |
+        <%= link_to 'Edit', edit_post_path(post) %> |
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+  </div>
 <% end %>

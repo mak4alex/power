@@ -1,0 +1,23 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <%= form_tag("/posts", method: "get", class: 'form-inline') do %>
+      <div class="form-group">
+        <%= label_tag(:q, "Search for:") %>
+        <%= text_field_tag(:q) %>
+      </div>
+      <div class="form-group">
+        <%= label_tag('sort-field', "Order By:") %>
+        <%= select_tag('sort-field', options_for_select(Post::ORDER_OPTIONS), class: "form-control") %>
+      </div>
+      <label class="radio-inline">
+        <input type="radio" name="sort-order" value="asc" checked="checked">
+        <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="sort-order" value="desc">
+        <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+      </label>
+      <%= submit_tag("Go!", class: 'btn btn-primary pull-right') %>
+    <% end %>
+  </div>
+</div>
