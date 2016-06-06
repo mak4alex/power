@@ -62,3 +62,7 @@ gem 'closure_tree', '~> 6.0'
 gem 'bootstrap-wysihtml5-rails', '~> 0.3.3.8'
 # jQuery File Upload by Sebastian Tschan integrated for Rails 3.1+ Asset Pipeline
 gem 'jquery-fileupload-rails', '~> 0.4.6'
+# ActiveModel/Record integrations for Elasticsearch.Intelligent search made easy
+gem 'searchkick', '~> 1.3'
+# Faker is used to easily generate fake data: names, addresses, phone numbers, etc.
+gem 'faker', '~> 1.6', '>= 1.6.3'

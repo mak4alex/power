@@ -7,7 +7,16 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.page(params[:page]).per(params[:per_page])
+    if params[:q].nil? || params[:q].empty?
+      @posts = Post.page(params[:page]).per(params[:per_page])
+    else
+      @posts = Post.search(
+        params[:q], page: params[:page], per: params[:per_page],
+        fields: [:title, :body], highlight: { tag: '<mark>' })
+      @posts.with_details.each do |post, details|
+        p post, details
+      end
+    end
   end
 
   # GET /posts/1
