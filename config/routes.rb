@@ -16,4 +16,8 @@ Rails.application.routes.draw do
     end
   
   end
+  
+  resources :images, only: [:create]
+  patch 'images', to: 'images#create'
+  
 end

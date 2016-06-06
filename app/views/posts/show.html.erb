@@ -3,7 +3,7 @@
     <h2 class="panel-title"><%= @post.title %></h2>
   </div>
   <div class="panel-body">
-    <%= @post.body %>
+    <%= @post.body.html_safe %>
   </div>
   <div class="panel-footer">
     <%= link_to 'Edit', edit_post_path(@post) %> |

@@ -58,3 +58,7 @@ gem 'paperclip', '~> 4.3', '>= 4.3.6'
 gem 'jquery-infinite-pages', '~> 0.2.0'
 # Easily and efficiently make your ActiveRecord model support hierarchies
 gem 'closure_tree', '~> 6.0'
+# A wysiwyg text editor for Bootstrap
+gem 'bootstrap-wysihtml5-rails', '~> 0.3.3.8'
+# jQuery File Upload by Sebastian Tschan integrated for Rails 3.1+ Asset Pipeline
+gem 'jquery-fileupload-rails', '~> 0.4.6'

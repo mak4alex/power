@@ -45,6 +45,8 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-wysihtml5-rails (0.3.3.8)
+      railties (>= 3.0)
     builder (3.2.2)
     byebug (8.2.5)
     climate_control (0.0.3)
@@ -84,6 +86,10 @@ GEM
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
+    jquery-fileupload-rails (0.4.6)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      sass (>= 3.2)
     jquery-infinite-pages (0.2.0)
       coffee-script
       jquery-rails
@@ -204,6 +210,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails (~> 6.3, >= 6.3.6)
   bootstrap-sass (~> 3.3, >= 3.3.6)
+  bootstrap-wysihtml5-rails (~> 0.3.3.8)
   byebug
   closure_tree (~> 6.0)
   coffee-rails (~> 4.1.0)
@@ -211,6 +218,7 @@ DEPENDENCIES
   devise (~> 4.1, >= 4.1.1)
   foreman (~> 0.81.0)
   jbuilder (~> 2.0)
+  jquery-fileupload-rails (~> 0.4.6)
   jquery-infinite-pages (~> 0.2.0)
   jquery-rails
   kaminari (~> 0.16.3)

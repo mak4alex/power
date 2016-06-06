@@ -1,25 +1,10 @@
-<%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= simple_form_for(@post) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :body, as: :wysihtml5, wysihtml5: { toolbar: { blockquote: false, html: true, color: true } } %>
+  <%= f.button :submit, class: 'btn-primary' %>
+  <span class="btn btn-info fileinput-button pull-right">
+    <i class="glyphicon glyphicon-plus"></i>
+    <span id="upload-status">Upload image...</span>
+    <input id="fileupload" type="file" name="file" data-url="/images">
+  </span>
 <% end %>

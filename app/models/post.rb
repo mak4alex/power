@@ -6,4 +6,7 @@ class Post < ActiveRecord::Base
   
   paginates_per 10
   
+  validates :title, presence: true, uniqueness: true, length: { in: 6..64 }
+  validates :body, presence: true
+  
 end

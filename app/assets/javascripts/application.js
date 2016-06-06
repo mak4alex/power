@@ -15,4 +15,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.infinite-pages
+//= require bootstrap-wysihtml5
+//= require jquery-fileupload/basic
 //= require_tree .
