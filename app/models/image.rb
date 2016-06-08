@@ -9,12 +9,19 @@ class Image < ActiveRecord::Base
     size: { in: 0..1.megabytes }, 
     content_type: { content_type: [ "image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
+
   def url_thumb
-    file.url(:thumb)
+    'https://power-mak4alex.c9users.io' + file.url(:thumb)
   end
 
+
   def url_medium
-    file.url(:medium)
+    'https://power-mak4alex.c9users.io' + file.url(:medium)
+  end
+
+  
+  def prepare_json
+    self.to_json(only: [:id, :alt], methods: [:url_medium, :url_thumb])
   end
 
 end

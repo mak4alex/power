@@ -5,7 +5,7 @@ class ImagesController < ApplicationController
   def create
     image = Image.new(file: params[:file])
     if image.save
-      render json: image.to_json(only: [:id, :alt], methods: [:url_medium]), status: :created
+      render json: image.prepare_json, status: :created
     else
       render json: image.errors, status: :unprocessable_entity
     end
