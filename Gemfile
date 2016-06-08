@@ -66,3 +66,5 @@ gem 'jquery-fileupload-rails', '~> 0.4.6'
 gem 'searchkick', '~> 1.3'
 # Faker is used to easily generate fake data: names, addresses, phone numbers, etc.
 gem 'faker', '~> 1.6', '>= 1.6.3'
+# FriendlyId lets you create pretty URLs and work with human-friendly.
+gem 'friendly_id', '~> 5.1'
