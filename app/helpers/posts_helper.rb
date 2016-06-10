@@ -9,6 +9,10 @@ module PostsHelper
     Post.order(visits_count: :desc).limit(count)
   end
   
+  def most_rated_posts(count = 5)
+    Post.order(cached_weighted_total: :desc).limit(count)
+  end
+  
   def comments_tree_for(comments)
     comments.map do |comment, nested_comments|
       render(comment) +

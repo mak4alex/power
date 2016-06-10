@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
-  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :update, :destroy, :vote]
+  before_action :set_post, only: [:edit, :update, :destroy, :vote]
   before_action :set_post_with_comments, only: [:show]
   before_action :update_visits, only: [:show]
 
@@ -73,9 +73,16 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  def vote
+    @post.vote_by voter: current_user, vote_weight: vote_weight
+    render json: { weighted_average: @post.weighted_average }
+  end
+  
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_post
       @post = Post.find(params[:id])
     end
@@ -88,8 +95,13 @@ class PostsController < ApplicationController
       @post.visits << Visit.new
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:title, :body)
+    end
+    
+    def vote_weight
+      weight =  params[:weight].to_i.abs
+      weight = Post::MAX_WEIGHT if weight > Post::MAX_WEIGHT
+      weight
     end
 end

@@ -2,7 +2,8 @@
   <div class="media-body">
     <h4 class="media-heading">
       <%= link_to post.title, post_path(post) %> 
-      <span class="badge"><%= post.visits_count %></span>
+      <span class="badge">
+        <%= { visited: post.visits_count, rated: post.weighted_average }[badge] %></span>
     </h4>
     <%= simple_format(truncate(post.body)) %>
   </div>

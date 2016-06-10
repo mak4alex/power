@@ -1,7 +1,14 @@
 <% cache(post) do %>
   <div class="post panel panel-default" <%= id(post) %> >
     <div class="panel-heading">
-      <h2 class="panel-title"><%= post.title %></h2>
+      <h2 class="panel-title">
+        <%= post.title %>
+        <span class="raty pull-right" 
+          data-score=<%= post.weighted_average %>
+          data-path=<%= vote_post_path(post) %> 
+          data-read-only=<%= !user_signed_in? %> >
+        </span>
+      </h2>
     </div>
     <div class="panel-body">
       <%= post.body %>

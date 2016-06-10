@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         
+  acts_as_voter
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validate :validate_username

@@ -68,3 +68,7 @@ gem 'searchkick', '~> 1.3'
 gem 'faker', '~> 1.6', '>= 1.6.3'
 # FriendlyId lets you create pretty URLs and work with human-friendly.
 gem 'friendly_id', '~> 5.1'
+# Rails gem to allowing records to be votable
+gem 'acts_as_votable', '~> 0.10.0'
+# Integrates jquery-raty into the Rails asset pipeline.
+gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
