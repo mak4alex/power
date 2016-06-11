@@ -5,6 +5,7 @@
 <div class="infinite-table">
   <div id="posts" class="page">
     <% cache(cache_key_for_posts) do %>
+      
       <%= render @posts %>
     <% end %>
   </div>

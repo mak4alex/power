@@ -1,22 +1,22 @@
 <div class="panel panel-info">
   <div class="panel-heading">
-    <%= form_tag("/posts", method: "get", class: 'form-inline') do %>
-      <div class="form-group">
-        <%= label_tag(:q, "Search for:") %>
-        <%= text_field_tag(:q) %>
+    <%= form_tag('/posts', method: 'get', class: 'form-inline', role: 'search') do %>
+      <div class="input-group">
+        <span class="input-group-addon" id="search-label">Search For:</span>
+        <%= text_field_tag(:q, params[:q], class: 'form-control', placeholder: 'Some stuff...', 'aria-describedby': 'search-label') %>
       </div>
-      <div class="form-group">
-        <%= label_tag('sort-field', "Order By:") %>
-        <%= select_tag('sort-field', options_for_select(Post::ORDER_OPTIONS), class: "form-control") %>
+      <div class="input-group">
+        <span class="input-group-addon" id="sort-label">Order By:</span>
+        <%= select_tag('sort-field', options_for_select(Post::ORDER_OPTIONS), class: "form-control", 'aria-describedby': 'sort-label') %>
+        <label class="input-group-addon">
+          <input type="radio" name="sort-order" value="asc" checked="checked">
+          <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+        </label>
+        <label class="input-group-addon">
+          <input type="radio" name="sort-order" value="desc">
+          <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+        </label>
       </div>
-      <label class="radio-inline">
-        <input type="radio" name="sort-order" value="asc" checked="checked">
-        <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="sort-order" value="desc">
-        <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-      </label>
       <%= submit_tag("Go!", class: 'btn btn-primary pull-right') %>
     <% end %>
   </div>

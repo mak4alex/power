@@ -10,10 +10,15 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validate :validate_username
+  
+  
+  has_many :favourites
+  has_many :favourite_posts, source: 'post', through: :favourites
+  
 
   def validate_username
     if User.where(email: name).exists?
-      errors.add(:name, :invalid)
+      errors.add(:name, :invalid) unless User.where(email: name, name: name).exists?
     end
   end
   

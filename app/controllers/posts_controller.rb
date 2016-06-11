@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :update, :destroy, :vote]
+  before_action :authenticate_user!, only: [:new, :create, :update, :destroy, :vote, :favourites]
   before_action :set_post, only: [:edit, :update, :destroy, :vote]
   before_action :set_post_with_comments, only: [:show]
   before_action :update_visits, only: [:show]
@@ -78,6 +78,11 @@ class PostsController < ApplicationController
   def vote
     @post.vote_by voter: current_user, vote_weight: vote_weight
     render json: { weighted_average: @post.weighted_average }
+  end
+  
+  def favourites
+    @posts = current_user.favourite_posts.page(params[:page]).per(params[:per_page])
+    render :index
   end
   
 

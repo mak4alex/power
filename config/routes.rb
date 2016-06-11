@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   
   devise_for :users
   
+  resources :users, only: [:index]
+  
   resources :helps, only: [:new, :create, :index]
   
   resources :posts do
@@ -15,6 +17,10 @@ Rails.application.routes.draw do
       put 'vote'
       post 'favourites', to: 'favourites#create'
       delete 'favourites', to: 'favourites#destroy'
+    end
+    
+    collection do
+      get 'favourites'
     end
   
   end

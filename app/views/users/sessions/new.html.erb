@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Log in</h2>
+  <h1>Log in</h1>
 </div>
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= f.input :login, label: 'Login (name or email)', autofocus: true %>
@@ -8,8 +8,7 @@
     <%= f.input :remember_me, as: :boolean %>
   <% end -%>
   <div class="actions">
-    <%= f.button :submit, 'Login' %>
+    <%= f.button :submit, 'Login', class: 'btn-primary' %>
+    <%= render "users/shared/links" %>
   </div>
 <% end %>
-
-<%= render "users/shared/links" %>
