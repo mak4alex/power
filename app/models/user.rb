@@ -44,8 +44,4 @@ class User < ActiveRecord::Base
     Favourite.delete_all(user: self, post: post)
   end
   
-  def has_in_favourite?(post)
-    Favourite.exists?(user: self, post: post)
-  end
-  
 end

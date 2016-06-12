@@ -1,18 +1,15 @@
 ready = ->
+  console.log('ready')
   
   window['rangy'].initialized = false
+  window.getSelection().removeAllRanges()
   
   iframe = $("iframe.wysihtml5-sandbox")
   
   iframe.onload = ->
     iframe.style.height = iframe.contentDocument.body.scrollHeight +'px'
   
-  $('.infinite-table').infinitePages
-    loading: ->
-      $(this).text('Loading next page...')
-    error: ->
-      $(this).button('There was an error, please try again')
-  
+
   $('#fileupload').fileupload({
     dataType: 'json',
     send: (e, data) ->

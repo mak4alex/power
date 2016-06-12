@@ -72,3 +72,6 @@ gem 'friendly_id', '~> 5.1'
 gem 'acts_as_votable', '~> 0.10.0'
 # Integrates jquery-raty into the Rails asset pipeline.
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
+# Profiling toolkit for Rack applications with Rails integration. 
+# Client Side profiling, DB profiling and Server profiling.
+gem 'rack-mini-profiler', '~> 0.10.1'

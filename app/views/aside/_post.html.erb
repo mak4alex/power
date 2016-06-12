@@ -3,7 +3,12 @@
     <h4 class="media-heading">
       <%= link_to post.title, post_path(post) %> 
       <span class="badge">
-        <%= { visited: post.visits_count, rated: post.weighted_average }[badge] %></span>
+        <% if badge == :visited %>
+          <%= post.visits_count %>
+        <% else %>
+          <%= post.rating.to_f || 0.0 %>
+        <% end %>
+      </span>
     </h4>
     <%= simple_format(truncate(post.body)) %>
   </div>

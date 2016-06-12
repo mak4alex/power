@@ -1,30 +1,36 @@
-<nav class="navbar navbar-default">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
-      data-target="#site-navbar" aria-expanded="false"
-    >
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <%= link_to 'Power', root_path, class: 'navbar-brand' %>
-  </div>
-  <div class="collapse navbar-collapse" id="site-navbar">
-    <ul class="nav navbar-nav">
-      <li><%= link_to 'Posts', posts_path %></li>
-      <li><%= link_to 'Users', users_path %></li>
-      <li><%= link_to 'New post', new_post_path %></li>
-      <li><%= link_to 'Help', new_help_path %></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
-        <li><%= link_to 'Profile', edit_user_registration_path %></li>
-        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to "Login", new_user_session_path %></li>
-        <li><%= link_to "Signup", new_user_registration_path %></li>
-      <% end %>
-    </ul>
+<nav class="navbar navbar-fixed-top navbar-default" id="nav" >
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse-side" 
+        data-target=".side-collapse"  data-target-2=".side-collapse-container">  
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'Power', root_path, class: 'navbar-brand' %>
+    </div>
+    <div class="navbar-default side-collapse in">
+      <div class="navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+          <li class="visible-xs">
+            <%= render 'posts/controls' %>
+          </li>
+          <li><%= link_to 'Posts', posts_path %></li>
+          <li><%= link_to 'Users', users_path %></li>
+          <li><%= link_to 'New post', new_post_path %></li>
+          <li><%= link_to 'Help', new_help_path %></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+            <li><%= link_to 'Profile', edit_user_registration_path %></li>
+            <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Login", new_user_session_path %></li>
+            <li><%= link_to "Signup", new_user_registration_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </nav>

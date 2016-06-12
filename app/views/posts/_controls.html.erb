@@ -1,23 +1,32 @@
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <%= form_tag('/posts', method: 'get', class: 'form-inline', role: 'search') do %>
-      <div class="input-group">
-        <span class="input-group-addon" id="search-label">Search For:</span>
-        <%= text_field_tag(:q, params[:q], class: 'form-control', placeholder: 'Some stuff...', 'aria-describedby': 'search-label') %>
-      </div>
-      <div class="input-group">
-        <span class="input-group-addon" id="sort-label">Order By:</span>
-        <%= select_tag('sort-field', options_for_select(Post::ORDER_OPTIONS), class: "form-control", 'aria-describedby': 'sort-label') %>
-        <label class="input-group-addon">
-          <input type="radio" name="sort-order" value="asc" checked="checked">
-          <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-        </label>
-        <label class="input-group-addon">
-          <input type="radio" name="sort-order" value="desc">
-          <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
-        </label>
-      </div>
-      <%= submit_tag("Go!", class: 'btn btn-primary pull-right') %>
-    <% end %>
+<%= form_tag('/posts', method: 'get', class: 'form-inline', role: 'search') do %>
+  <div class="form-group">
+    <%= text_field_tag(:q, params[:q], class: 'form-control', placeholder: 'Search for...') %>
   </div>
-</div>
+  <% if user_signed_in? %>
+    <div class="form-group input-group" style="height: 34px;">
+      <label class="input-group-addon">
+        <%= check_box_tag(:my, 1, params[:my].present?) %>
+        <span>My Posts</span>
+      </label>
+      <label class="input-group-addon">
+        <%= check_box_tag(:fav, 1, params[:fav].present?) %>
+        <span>Favourite Posts</span>
+      </label>
+    </div>
+  <% end %>
+  <div class="form-group input-group">
+    <%= select_tag(:sort_field, options_for_select(Post::ORDER_OPTIONS, selected: params[:sort_field]), class: "form-control") %>
+    <label class="input-group-addon">
+      <%= radio_button_tag(:sort_order, 'desc',  (params[:sort_order].blank? || params[:sort_order] == 'desc'))%>
+      <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+    </label>
+    <label class="input-group-addon">
+      <%= radio_button_tag(:sort_order, 'asc', params[:sort_order] == 'asc')%>
+      <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+    </label>
+  </div>
+  <div class="form-group">
+    <%= submit_tag("Go!", class: 'btn btn-block btn-primary') %>
+  </div>
+<% end %>
+  

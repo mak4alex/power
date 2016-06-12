@@ -3,20 +3,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy, :vote]
   before_action :set_post_with_comments, only: [:show]
   before_action :update_visits, only: [:show]
+  before_action :add_user_id_to_params, only: [:index]
+  
 
   # GET /posts
   # GET /posts.json
   def index
-    if params[:q].nil? || params[:q].empty?
-      @posts = Post.page(params[:page]).per(params[:per_page])
-    else
-      @posts = Post.search(
-        params[:q], page: params[:page], per: params[:per_page],
-        fields: [:title, :body], highlight: { tag: '<mark>' })
-      @posts.with_details.each do |post, details|
-        p post, details
-      end
-    end
+    @posts = Post.fetch(params)
   end
 
   # GET /posts/1
@@ -92,12 +85,16 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
     
+    def add_user_id_to_params
+      params[:user_id] = current_user.id if user_signed_in?
+    end
+    
     def set_post_with_comments
       @post = Post.includes(:comments).find(params[:id])
     end
     
     def update_visits
-      @post.visits << Visit.new
+      Post.increment_counter(:visits_count, @post.id)
     end
 
     def post_params

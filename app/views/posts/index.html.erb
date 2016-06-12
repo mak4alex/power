@@ -1,15 +1,18 @@
 <div class="page-header">
   <h1>Latest News</h1>
 </div>
-<%= render 'controls' %>
+<div class="panel panel-info hidden-xs">
+  <div class="panel-heading">
+    <%= render 'controls' %>
+  </div>
+</div>
 <div class="infinite-table">
   <div id="posts" class="page">
     <% cache(cache_key_for_posts) do %>
-      
       <%= render @posts %>
     <% end %>
   </div>
   <p class="pagination">
-    <%= link_to_next_page(@posts, 'Next Page', remote: true, params: { q: params[:q] }) %>
+    <%= link_to_next_page(@posts, 'Next Page', remote: true, params: params ) %>
   </p>
 </div>
