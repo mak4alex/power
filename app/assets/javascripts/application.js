@@ -18,4 +18,5 @@
 //= require bootstrap-wysihtml5
 //= require jquery-fileupload/basic
 //= require jquery.raty
+//= require jquery.tagsinput.min
 //= require_tree .

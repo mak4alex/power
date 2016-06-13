@@ -1,6 +1,7 @@
 <%= simple_form_for(@post) do |f| %>
   <%= f.input :title %>
   <%= f.input :body, rows: 25, as: :wysihtml5, wysihtml5: { toolbar: { blockquote: false, html: true, color: true } } %>
+  <%= f.input :tag_list, input_html: { value: @post.tag_list.join(',') } %>
   <%= f.button :submit, class: 'btn-primary' %>
   <span class="btn btn-info fileinput-button pull-right">
     <i class="glyphicon glyphicon-plus"></i>

@@ -75,3 +75,6 @@ gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
 # Profiling toolkit for Rack applications with Rails integration. 
 # Client Side profiling, DB profiling and Server profiling.
 gem 'rack-mini-profiler', '~> 0.10.1'
+# With ActsAsTaggableOn, you can tag a single model on several contexts. 
+# It also provides other advanced functionality.
+gem 'acts-as-taggable-on', '~> 3.5'

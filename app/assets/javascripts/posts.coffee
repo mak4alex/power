@@ -46,6 +46,19 @@ ready = ->
       
   })
   
+  $('#post_tag_list').tagsInput({
+    'autocomplete_url': null,
+    'interactive':true,
+    'defaultText':'add a tag',
+    'delimiter': [','],
+    'height':'50px',
+    'width':'100%',
+    'removeWithBackspace' : true,
+    'minChars' : 3,
+    'maxChars' : 32,
+    'placeholderColor' : '#666666'
+  })
+  
 
 
 $(document).on('ready', ready)

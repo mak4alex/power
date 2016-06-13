@@ -17,6 +17,7 @@ class Post < ActiveRecord::Base
   
   acts_as_votable
   
+  acts_as_taggable 
   
   friendly_id :slug_candidates, use: [:slugged, :finders]
   def slug_candidates
@@ -71,6 +72,7 @@ class Post < ActiveRecord::Base
       .in_favour(params)
       .page(params[:page])
       .per(params[:per_page] || DEFAULT_PER_PAGE)
+      .includes(:author)
       .sort(params)
   end
   
