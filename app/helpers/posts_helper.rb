@@ -22,6 +22,10 @@ module PostsHelper
     Post.select(query).order('rating DESC').limit(count)
   end
   
+  def has_in_favourite?(post)
+    params[:q].present? ? current_user.has_in_favourite?(post) : post.has_favourite
+  end
+  
   def comments_tree_for(comments)
     comments.map do |comment, nested_comments|
       render(comment) +

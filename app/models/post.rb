@@ -29,6 +29,8 @@ class Post < ActiveRecord::Base
  
   has_many :visits
   has_many :comments
+  
+  belongs_to :author, class_name: 'User', foreign_key: 'user_id', required: true
  
   
   validates :title, presence: true, uniqueness: true, length: { in: 6..64 }
@@ -46,26 +48,55 @@ class Post < ActiveRecord::Base
   end
   
 
-  def has_in_favourite?(post)
-    Favourite.exists?(user: self, post: post)
+  
+  scope :owned, -> (params) { where(user_id: params[:user_id]) if params[:my].present? && params[:user_id].present? }
+  scope :sort, -> (params) { order(params[:sort_field] => params[:sort_order]) if params[:sort_field].present? }
+  scope :in_favour, -> (params) do
+    if params[:fav].present? 
+      query = %{
+        EXISTS (
+          SELECT 1 
+          FROM `favourites` 
+          WHERE `favourites`.`user_id` = #{params[:user_id]} 
+            AND `favourites`.`post_id` = posts.id LIMIT 1
+        )
+      }
+      where(query)
+    end
   end
-  
-  scope :owned, -> (params) { order(params[:sort_field] => params[:sort_order]) unless params[:my].blank? }
-  scope :sort, -> (params) { order(params[:sort_field] => params[:sort_order]) unless params[:sort_field].blank? }
-  
   
   def self.fetch(params)
     with_favourite_of(params)
+      .owned(params)
+      .in_favour(params)
       .page(params[:page])
       .per(params[:per_page] || DEFAULT_PER_PAGE)
       .sort(params)
   end
   
   def self.fetch_with_search(params)
-    search( params[:q], fields: [:title, :body],
-      highlight: { tag: '<mark>', fields: [ :title, :body ] },
-      order: { params[:sort_field] => params[:sort_order] },
-      page: params[:page] || 1, per: params[:per_page] || DEFAULT_PER_PAGE )
+    options = {
+      fields: [:title, :body],
+      operator: 'or',
+      highlight: { fields: [:title, :body], tag: '<u>' },
+      page: params[:page] || 1,
+      per_page: params[:per_page] || DEFAULT_PER_PAGE
+    }
+    
+    if params[:sort_field].present?
+      options[:order] = { params[:sort_field] => params[:sort_order] || 'desc' } 
+    end
+    
+    if params[:user_id].present?
+      options[:where] = { user_id: params[:user_id] } if params[:my].present?
+      
+      if params[:fav].present?
+        options[:where] ||= {}
+        options[:where][:id] =  Post.where("EXISTS (SELECT 1 FROM `favourites` WHERE `favourites`.`user_id` = #{params[:user_id]} AND `favourites`.`post_id` = posts.id LIMIT 1)").ids
+      end
+    end
+    
+    search(params[:q], options)
   end
   
   def weighted_average

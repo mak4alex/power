@@ -1,29 +1,27 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :destroy, :vote, :favourites]
   before_action :set_post, only: [:edit, :update, :destroy, :vote]
+  before_action :only_owner!, only: [:edit, :update, :destroy]
   before_action :set_post_with_comments, only: [:show]
   before_action :update_visits, only: [:show]
   before_action :add_user_id_to_params, only: [:index]
   
 
-  # GET /posts
-  # GET /posts.json
   def index
-    @posts = Post.fetch(params)
+    @posts = params[:q].present? ? Post.fetch_with_search(params) : Post.fetch(params)
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
+
   def show
     @comment = Comment.new
   end
 
-  # GET /posts/new
+
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
+
   def edit
   end
 
@@ -83,6 +81,10 @@ class PostsController < ApplicationController
 
     def set_post
       @post = Post.find(params[:id])
+    end
+    
+    def only_owner!
+      redirect_to(root_url, flash: { error: 'You are not owner!' }) unless current_user.owner_of?(@post)
     end
     
     def add_user_id_to_params

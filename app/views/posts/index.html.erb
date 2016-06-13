@@ -8,11 +8,17 @@
 </div>
 <div class="infinite-table">
   <div id="posts" class="page">
-    <% cache(cache_key_for_posts) do %>
-      <%= render @posts %>
+    <% if params[:q].present?  %>
+      <% @posts.with_details.each do |post, details| %>
+        <%= render partial: 'search_post', locals: { post: post, highlight: details[:highlight] } %>
+      <% end %>
+    <% else %>
+      <% cache(cache_key_for_posts) do %>
+        <%= render @posts %>
+      <% end %>
     <% end %>
   </div>
-  <p class="pagination">
-    <%= link_to_next_page(@posts, 'Next Page', remote: true, params: params ) %>
-  </p>
+  <div class="pagination">
+    <%= render partial: 'next_page_link', locals: { posts: @posts } %>
+  </div>
 </div>

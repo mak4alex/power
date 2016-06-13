@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validate :validate_username
   
   
+  has_many :posts
   has_many :favourites
   has_many :favourite_posts, source: 'post', through: :favourites
   
@@ -42,6 +43,14 @@ class User < ActiveRecord::Base
   
   def remove_favourite(post)
     Favourite.delete_all(user: self, post: post)
+  end
+  
+  def owner_of?(post)
+    self.id == post.user_id
+  end
+  
+  def has_in_favourite?(post)
+    Favourite.exists?(user: self, post: post)
   end
   
 end

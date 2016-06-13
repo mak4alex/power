@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611144338) do
+ActiveRecord::Schema.define(version: 20160612185148) do
 
   create_table "comment_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id",   limit: 4, null: false
@@ -103,11 +103,13 @@ ActiveRecord::Schema.define(version: 20160611144338) do
     t.string   "slug",                  limit: 255
     t.integer  "cached_votes_total",    limit: 4,     default: 0
     t.integer  "cached_weighted_total", limit: 4,     default: 0
+    t.integer  "user_id",               limit: 4
   end
 
   add_index "posts", ["cached_votes_total"], name: "index_posts_on_cached_votes_total", using: :btree
   add_index "posts", ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total", using: :btree
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -148,4 +150,5 @@ ActiveRecord::Schema.define(version: 20160611144338) do
   add_foreign_key "comments", "users"
   add_foreign_key "favourites", "posts"
   add_foreign_key "favourites", "users"
+  add_foreign_key "posts", "users"
 end
