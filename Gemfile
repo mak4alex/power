@@ -36,7 +36,6 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -47,3 +46,11 @@ gem 'kaminari', '~> 0.16.3'
 gem 'puma', '~> 3.4'
 gem 'foreman', '~> 0.81.0'
 gem 'pg', '~> 0.18.4', group: :production
+gem 'devise', '~> 4.1', '>= 4.1.1'
+gem 'simple_form', '~> 3.2', '>= 3.2.1'
+# An adapter for using Mailgun with Rails and Action Mailer
+gem 'mailgun_rails', '~> 0.8.0'
+# ActiveRecord backend for Delayed::Job, originally authored by Tobias Lütke
+gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.1'
+# Easy upload management for ActiveRecord
+gem 'paperclip', '~> 4.3', '>= 4.3.6'

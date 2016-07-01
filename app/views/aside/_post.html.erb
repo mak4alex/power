@@ -1,0 +1,6 @@
+<div class="media">
+  <div class="media-body">
+    <h4 class="media-heading"><%= link_to post.title, post_path(post) %></h4>
+    <%= simple_format(truncate(post.body)) %>
+  </div>
+</div>

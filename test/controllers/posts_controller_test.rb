@@ -24,8 +24,10 @@ class PostsControllerTest < ActionController::TestCase
     assert_redirected_to post_path(assigns(:post))
   end
 
-  test "should show post" do
-    get :show, id: @post
+  test "should show post with increasing visits" do
+    assert_difference('Visit.count') do
+      get :show, id: @post
+    end
     assert_response :success
   end
 
