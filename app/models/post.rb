@@ -12,8 +12,11 @@ class Post < ActiveRecord::Base
   MAX_WEIGHT = 5
   DEFAULT_PER_PAGE = 10
   
+   scope :search_import, -> { select('posts.field').limit(5) }
   
   searchkick fields: [ 'title^2', 'body' ]
+  
+ 
   
   acts_as_votable
   
