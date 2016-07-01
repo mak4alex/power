@@ -16,14 +16,14 @@
       <li><%= link_to 'New post', new_post_path %></li>
       <li><%= link_to 'Help', new_help_path %></li>
     </ul>
-    <form class="navbar-form navbar-left" role="search">
+    <%= form_tag({}, method: 'get', class: 'navbar-form navbar-left', role: 'search') do %>
       <div class="input-group">
-        <input name="q" type="text" class="form-control" placeholder="Search for...">
+        <%= text_field_tag(:q, params[:q], class: "form-control", placeholder: "Search for..." ) %>
         <span class="input-group-btn">
           <button type="submit" class="btn btn-info">Go!</button>
         </span>
       </div>
-    </form>
+    <% end %>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
         <li><%= link_to 'Profile', edit_user_registration_path %></li>

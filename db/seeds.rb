@@ -1,9 +1,6 @@
 44.times do |i|
   Post.create!(
-    title: "Title ##{i}", 
-    body: 
-      'This file should contain all the record creation needed to seed the 
-      database with its default values.The data can then be loaded with the rake 
-      db:seed (or created alongside the db with db:setup).'
+    title: Faker::Lorem.sentence(3), 
+    body:  Faker::Lorem.paragraph(10)
   )
 end

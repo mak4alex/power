@@ -54,3 +54,10 @@ gem 'mailgun_rails', '~> 0.8.0'
 gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.1'
 # Easy upload management for ActiveRecord
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
+# A light-weight infinite scrolling jQuery plugin, wrapped in a gem for Rails
+gem 'jquery-infinite-pages', '~> 0.2.0'
+# ActiveModel/Record integrations for Elasticsearch.
+# Intelligent search made easy
+gem 'searchkick', '~> 1.3'
+# Faker is used to easily generate fake data: names, addresses, phone numbers, etc.
+gem 'faker', '~> 1.6', '>= 1.6.3'
