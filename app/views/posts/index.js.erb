@@ -4,5 +4,5 @@ $("<%=j render @posts %>").appendTo($("#posts"));
   $('.pagination').html("That's all, folks!");
 <% else %>
   $('.pagination')
-    .html("<%=j link_to_next_page(@posts, 'Next Page', remote: true, params: {q: params[:q]}) %>");
+    .html("<%=j render partial: 'next_page_link', locals: { posts: @posts } %>");
 <% end %>

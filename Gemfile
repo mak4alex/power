@@ -56,8 +56,25 @@ gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.1'
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
 # A light-weight infinite scrolling jQuery plugin, wrapped in a gem for Rails
 gem 'jquery-infinite-pages', '~> 0.2.0'
-# ActiveModel/Record integrations for Elasticsearch.
-# Intelligent search made easy
+# Easily and efficiently make your ActiveRecord model support hierarchies
+gem 'closure_tree', '~> 6.0'
+# A wysiwyg text editor for Bootstrap
+gem 'bootstrap-wysihtml5-rails', '~> 0.3.3.8'
+# jQuery File Upload by Sebastian Tschan integrated for Rails 3.1+ Asset Pipeline
+gem 'jquery-fileupload-rails', '~> 0.4.6'
+# ActiveModel/Record integrations for Elasticsearch.Intelligent search made easy
 gem 'searchkick', '~> 1.3'
 # Faker is used to easily generate fake data: names, addresses, phone numbers, etc.
 gem 'faker', '~> 1.6', '>= 1.6.3'
+# FriendlyId lets you create pretty URLs and work with human-friendly.
+gem 'friendly_id', '~> 5.1'
+# Rails gem to allowing records to be votable
+gem 'acts_as_votable', '~> 0.10.0'
+# Integrates jquery-raty into the Rails asset pipeline.
+gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
+# Profiling toolkit for Rack applications with Rails integration. 
+# Client Side profiling, DB profiling and Server profiling.
+gem 'rack-mini-profiler', '~> 0.10.1'
+# With ActsAsTaggableOn, you can tag a single model on several contexts. 
+# It also provides other advanced functionality.
+gem 'acts-as-taggable-on', '~> 3.5'

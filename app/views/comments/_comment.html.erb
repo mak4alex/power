@@ -1,0 +1,12 @@
+<div id=<%= "comment-#{comment.id}" %> class="well well-sm">
+  <p class="text-muted">Added by 
+    <strong><%= comment.author %></strong> on
+    <%= l(comment.created_at, format: '%B, %d %Y %H:%M:%S') %>
+    <%= link_to 'reply', new_post_comment_path(comment.post, parent_id: comment.id), class: 'btn btn-link', remote: true %>
+  </p>
+  <blockquote>
+    <p><%= comment.body %></p>
+  </blockquote>
+  <div class="reply-form">
+  </div>
+</div>

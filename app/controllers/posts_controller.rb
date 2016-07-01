@@ -1,33 +1,27 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :update, :destroy, :vote, :favourites]
+  before_action :set_post, only: [:edit, :update, :destroy, :vote]
+  before_action :only_owner!, only: [:edit, :update, :destroy]
+  before_action :set_post_with_comments, only: [:show]
   before_action :update_visits, only: [:show]
+  before_action :add_user_id_to_params, only: [:index]
+  
 
-  # GET /posts
-  # GET /posts.json
   def index
-    if params[:q].nil? || params[:q].empty?
-      @posts = Post.page(params[:page])
-    else
-      @posts = Post.search(
-        params[:q], page: params[:page], fields: [:title, :body], 
-        highlight: { tag: '<mark>' })
-      @posts.with_details.each do |post, details|
-        p post, details
-      end
-    end
+    @posts = params[:q].present? ? Post.fetch_with_search(params) : Post.fetch(params)
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
+
   def show
+    @comment = Comment.new
   end
 
-  # GET /posts/new
+
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
+
   def edit
   end
 
@@ -70,19 +64,48 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  def vote
+    @post.vote_by voter: current_user, vote_weight: vote_weight
+    render json: { weighted_average: @post.weighted_average }
+  end
+  
+  def favourites
+    @posts = current_user.favourite_posts.page(params[:page]).per(params[:per_page])
+    render :index
+  end
+  
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_post
       @post = Post.find(params[:id])
     end
     
+    def only_owner!
+      redirect_to(root_url, flash: { error: 'You are not owner!' }) unless current_user.owner_of?(@post)
+    end
+    
+    def add_user_id_to_params
+      params[:user_id] = current_user.id if user_signed_in?
+    end
+    
+    def set_post_with_comments
+      @post = Post.includes(:comments).find(params[:id])
+    end
+    
     def update_visits
-      @post.visits << Visit.new
+      Post.increment_counter(:visits_count, @post.id)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.require(:post).permit(:title, :body, :tag_list)
+    end
+    
+    def vote_weight
+      weight =  params[:weight].to_i.abs
+      weight = Post::MAX_WEIGHT if weight > Post::MAX_WEIGHT
+      weight
     end
 end

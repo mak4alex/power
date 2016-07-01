@@ -1,0 +1,11 @@
+<div class="page-header">
+  <h1>Users</h1>
+</div>
+<div class="infinite">
+  <div id="posts" class="page">
+    <%= render @users %>
+  </div>
+  <p class="pagination">
+    <%= link_to_next_page(@users, 'Next Page', remote: true) %>
+  </p>
+</div>

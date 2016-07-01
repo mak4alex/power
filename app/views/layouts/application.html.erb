@@ -10,22 +10,32 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container-fluid">
+  <header>
     <%= render 'header/navbar' %>
+  </header>
+  <div class="container side-collapse-container">
     <div class="row">
-      <main class="col-sm-offset-2 col-sm-8">
+      <aside class="col-sm-2 hidden-xs">
+        <h3>Most rated</h3>
+        <%= render partial: 'aside/post', collection: most_rated_posts, locals: { badge: :rated } %>
+      </aside>
+      <main class="col-sm-8">
         <%= flash_messages %>
-        <div class="row col-sm-12">
+        <div>
           <%= yield %>
         </div>
       </main>
-      <aside class="col-sm-2">
-        <%= render partial: 'aside/post', collection: most_visited_posts %>
+      <aside class="col-sm-2 hidden-xs">
+        <h3>Most visited</h3>
+        <%= render partial: 'aside/post', collection: most_visited_posts, locals: { badge: :visited } %>
       </aside>
     </div>
-    <footer class="row text-center">
+    <footer class="row">
       <br/>
-      <p class="text-muted">2016 Minsk Blog</p>
+      <p class="text-muted text-center">2016 Minsk Blog</p>
+      <p>
+        <%= debug(params) if Rails.env.development? %>
+      </p>
     </footer>
   </div>
 </body>

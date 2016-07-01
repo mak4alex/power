@@ -1,0 +1,2 @@
+$("<%= "#comment-#{@comment.parent_id}" %> .reply-form")
+  .html("<%= escape_javascript render(partial: 'comments/form', locals: { comment: @comment, post: @post }) %>");

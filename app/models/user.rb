@@ -5,13 +5,21 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         
+  acts_as_voter
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validate :validate_username
+  
+  
+  has_many :posts
+  has_many :favourites
+  has_many :favourite_posts, source: 'post', through: :favourites
+  
 
   def validate_username
     if User.where(email: name).exists?
-      errors.add(:name, :invalid)
+      errors.add(:name, :invalid) unless User.where(email: name, name: name).exists?
     end
   end
   
@@ -26,6 +34,23 @@ class User < ActiveRecord::Base
     elsif conditions.has_key?(:name) || conditions.has_key?(:email)
       where(conditions.to_hash).first
     end
+  end
+  
+  
+  def add_favourite(post)
+    Favourite.create(user: self, post: post)
+  end
+  
+  def remove_favourite(post)
+    Favourite.delete_all(user: self, post: post)
+  end
+  
+  def owner_of?(post)
+    self.id == post.user_id
+  end
+  
+  def has_in_favourite?(post)
+    Favourite.exists?(user: self, post: post)
   end
   
 end

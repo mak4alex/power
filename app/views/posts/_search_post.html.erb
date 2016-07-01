@@ -1,0 +1,34 @@
+<div class="post panel panel-default" <%= id(post) %> >
+  <div class="panel-heading">
+    <h2 class="panel-title">
+      <%= link_to((highlight[:title] || post.title).html_safe, post) %> 
+      <span class="raty pull-right" 
+        data-score=<%= post.weighted_average %>
+        data-path=<%= vote_post_path(post) %> 
+        data-read-only=<%= !user_signed_in? %> >
+      </span>
+    </h2>
+  </div>
+  <div class="panel-body">
+    <%= (highlight[:body] || post.body).html_safe %>
+  </div>
+  <% if user_signed_in? %>
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-sm-6 favourite_link">
+          <% if has_in_favourite? post %>
+            <%= render partial: 'remove_favourite_link', locals: { post: post } %>
+          <% else %>
+            <%= render partial: 'add_favourite_link', locals: { post: post } %>
+          <% end %>
+        </div>
+        <% if current_user.owner_of?(post) %>
+          <div class="col-sm-6 post-controls text-right">
+            <%= link_to 'Edit', edit_post_path(post) %> |
+            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

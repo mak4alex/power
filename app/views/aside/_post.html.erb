@@ -1,6 +1,15 @@
 <div class="media">
   <div class="media-body">
-    <h4 class="media-heading"><%= link_to post.title, post_path(post) %></h4>
+    <h4 class="media-heading">
+      <%= link_to post.title, post_path(post) %> 
+      <span class="badge">
+        <% if badge == :visited %>
+          <%= post.visits_count %>
+        <% else %>
+          <%= post.rating.to_f || 0.0 %>
+        <% end %>
+      </span>
+    </h4>
     <%= simple_format(truncate(post.body)) %>
   </div>
 </div>

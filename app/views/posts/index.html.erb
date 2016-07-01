@@ -1,22 +1,24 @@
-<h1>Listing Posts</h1>
-
+<div class="page-header">
+  <h1>Latest News</h1>
+</div>
+<div class="panel panel-info hidden-xs">
+  <div class="panel-heading">
+    <%= render 'controls' %>
+  </div>
+</div>
 <div class="infinite-table">
-  <table id="posts" class="table">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Body</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-    <tbody class="page">
+  <div id="posts" class="page">
+    <% if params[:q].present?  %>
+      <% @posts.with_details.each do |post, details| %>
+        <%= render partial: 'search_post', locals: { post: post, highlight: details[:highlight] } %>
+      <% end %>
+    <% else %>
       <% cache(cache_key_for_posts) do %>
         <%= render @posts %>
       <% end %>
-    </tbody>
-  </table>
-  
-  <p class="pagination">
-    <%= link_to_next_page(@posts, 'Next Page', remote: true, params: {q: params[:q]}) %>
-  </p>
+    <% end %>
+  </div>
+  <div class="pagination">
+    <%= render partial: 'next_page_link', locals: { posts: @posts } %>
+  </div>
 </div>

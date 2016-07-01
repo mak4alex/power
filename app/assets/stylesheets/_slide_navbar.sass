@@ -1,0 +1,42 @@
+body
+  padding-top: 50px
+  position: relative
+
+.navbar
+  margin-bottom: 0px
+
+pre 
+  tab-size: 8
+  
+nav li
+  font-weight: bold
+  &:hover
+    background-color: #eee
+    
+
+
+@media screen and (max-width: 768px) 
+  .side-collapse-container
+    width: 100%
+    position: relative
+    right: 0
+    transition: right .4s
+  
+  .side-collapse-container.out
+    right: 70%
+  
+  .side-collapse
+    top: 50px
+    bottom: 0
+    right: 0
+    width: 70%
+    position: fixed
+    transition: width .4s
+    overflow-y: auto
+  
+  .side-collapse.in
+    width: 0
+  
+  nav li
+    border-bottom: 1px solid $gray
+

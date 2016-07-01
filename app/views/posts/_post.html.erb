@@ -1,9 +1,44 @@
 <% cache(post) do %>
-  <tr class="post" >
-    <td><%= post.title %></td>
-    <td><%= post.body %></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <div class="post panel panel-default" <%= id(post) %> >
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-sm-9">
+          <h2 class="panel-title">
+            <%= link_to post.title, post %>
+            <span class="badge">by <%= post.author.name %></span>
+          </h2>
+        </div>
+        <div class="col-sm-3 text-right">
+          <span class="raty"
+            data-score=<%= post.weighted_average %>
+            data-path=<%= vote_post_path(post) %> 
+            data-read-only=<%= !user_signed_in? %>
+          >
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <%= post.body %>
+    </div>
+    <% if user_signed_in? %>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-sm-6 favourite_link">
+            <% if has_in_favourite? post %>
+              <%= render partial: 'remove_favourite_link', locals: { post: post } %>
+            <% else %>
+              <%= render partial: 'add_favourite_link', locals: { post: post } %>
+            <% end %>
+          </div>
+          <% if current_user.owner_of?(post) %>
+            <div class="col-sm-6 post-controls text-right">
+              <%= link_to 'Edit', edit_post_path(post) %> |
+              <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>

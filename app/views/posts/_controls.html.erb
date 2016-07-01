@@ -1,0 +1,32 @@
+<%= form_tag('/posts', method: 'get', class: 'form-inline', role: 'search') do %>
+  <div class="form-group">
+    <%= text_field_tag(:q, params[:q], class: 'form-control', placeholder: 'Search for...') %>
+  </div>
+  <% if user_signed_in? %>
+    <div class="form-group input-group" style="height: 34px;">
+      <label class="input-group-addon">
+        <%= check_box_tag(:my, 1, params[:my].present?) %>
+        <span>My Posts</span>
+      </label>
+      <label class="input-group-addon">
+        <%= check_box_tag(:fav, 1, params[:fav].present?) %>
+        <span>Favourite Posts</span>
+      </label>
+    </div>
+  <% end %>
+  <div class="form-group input-group">
+    <%= select_tag(:sort_field, options_for_select(Post::ORDER_OPTIONS, selected: params[:sort_field]), class: "form-control") %>
+    <label class="input-group-addon">
+      <%= radio_button_tag(:sort_order, 'desc',  (params[:sort_order].blank? || params[:sort_order] == 'desc'))%>
+      <span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>
+    </label>
+    <label class="input-group-addon">
+      <%= radio_button_tag(:sort_order, 'asc', params[:sort_order] == 'asc')%>
+      <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+    </label>
+  </div>
+  <div class="form-group">
+    <%= submit_tag("Go!", class: 'btn btn-block btn-primary') %>
+  </div>
+<% end %>
+  
